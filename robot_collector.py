@@ -41,14 +41,14 @@ class PrometheusCollector():
             skipped = stat.get('skip')
             passed  = stat.get('pass')
     
-            labels=f'{{test_app="{self.testsuite}", test_id="{stat_id}", test_name="{stat_name}"}}'
+            labels=f'{{suite="{self.testsuite}", suite_id="{stat_id}", suite_name="{stat_name}"}}'
     
             self.write_metric('robot_passed_total', 'Total number of passed tests.', passed, labels)
             self.write_metric('robot_skipped_total', 'Total number of skipped tests.', skipped, labels)
             self.write_metric('robot_failed_total', 'Total number of failed tests.', failed, labels)
     
     
-        self.write_metric('robot_tests_total', 'Total number of all tests.', test_count, f'{{test_app="{self.testsuite}"}}')
+        self.write_metric('robot_tests_total', 'Total number of all tests.', test_count, f'{{suite="{self.testsuite}"}}')
 
 def usage():
     print("Usage: robot_collector [-h|--help] -o|--outputxml <path to output.xml> -m|--metricsfile <metrics file for textfile collector> -t|--testsuite <test suite name>")
